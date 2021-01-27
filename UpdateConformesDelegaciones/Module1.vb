@@ -40,7 +40,7 @@ Module Module1
                     "ase.ArcVerNiv = 3 And ase.ArcVerSub = 1 And ase.ArcVerEmp = 0 and ((ase.ArcVerCod = 1 and (ase.arcversec<>15 OR (ase.ArcVerSec=15 AND Ase.ArcVerCtr<>3))) or (ase.ArcVerCod = 8 AND ASe.ArcVerCtr=3 and ase.arcversec in (15,23,24))) And ase.ArcVerRef = ps.ExpCod " &
                     "inner join arcver AF ON af.HolCod=pf.HolCod and af.ArcVerCtr=pf.ExpCtrCod and af.ArcVerSec=pf.SecCod and " &
                     "af.ArcVerNiv = 3 And af.ArcVerSub = 1 And af.ArcVerEmp = 0 And af.ArcVerCod = 1 And af.ArcVerRef = pf.ExpCod " &
-                    "where ps.ExpDatEtd>DATEADD(day,-40,getdate()) and ps.holcod=0 and not ase.ArcVerRut like '\\%' and af.ArcVerRut like '\\%'"
+                    "where ps.ExpDatEtd>DATEADD(month,-6,getdate()) and ps.holcod=0 and not ase.ArcVerRut like '\\%' and af.ArcVerRut like '\\%'"
         exito = instSQL.SentenciaSQL(strconsulta, baseDatos.sConexionTRANS)
         If exito = 0 Then
             strconsulta = "update ase  set ase.arcverrut=af.arcverrut, ase.arcverfec=getdate(), ase.arcvermat=1 " &
@@ -54,7 +54,7 @@ Module Module1
                    "where ps.ExpDatEtd>DATEADD(day,-40,getdate()) and ps.holcod=0 and not ase.ArcVerRut like '\\%' and af.ArcVerRut like '\\%'"
             exito = instSQL.SentenciaSQL(strconsulta, baseDatos.sConexionTRANS)
         End If
-
+        Console.WriteLine("Se han actualizado " & exito.ToString() & " expediciones")
         Console.WriteLine("Fin Proceso actualización")
     End Sub
 
